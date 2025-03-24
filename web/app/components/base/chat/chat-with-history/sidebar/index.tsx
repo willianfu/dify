@@ -82,18 +82,18 @@ const Sidebar = ({ isPanel }: Props) => {
       isPanel && 'rounded-xl border-[0.5px] border-components-panel-border-subtle bg-components-panel-bg shadow-lg',
     )}>
       <div className={cn(
-        'flex shrink-0 items-center gap-3 p-3 pr-2',
+        'flex shrink-0 items-center gap-2 p-3 pr-0',
       )}>
         <div className='shrink-0'>
           <AppIcon
-            size='large'
+            size='medium'
             iconType={appData?.site.icon_type}
             icon={appData?.site.icon}
             background={appData?.site.icon_background}
             imageUrl={appData?.site.icon_url}
           />
         </div>
-        <div className={cn('system-md-semibold grow truncate text-text-secondary')}>{appData?.site.title}</div>
+        <div className={cn('grow truncate text-lg font-bold text-gray-800')}>{appData?.site.title}</div>
         {!isMobile && isSidebarCollapsed && (
           <ActionButton size='l' onClick={() => handleSidebarCollapse(false)}>
             <RiExpandRightLine className='h-[18px] w-[18px]' />

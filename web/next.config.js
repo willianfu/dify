@@ -44,6 +44,22 @@ const nextConfig = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://58.17.14.95:10015/api/:path*',
+      },
+      {
+        source: '/console/api/:path*',
+        destination: 'http://58.17.14.95:10015/console/api/:path*',
+      },
+      {
+        source: '/files/:path*',
+        destination: 'http://58.17.14.95:10015/files/:path*',
+      },
+    ]
+  },
   output: 'standalone',
 }
 
