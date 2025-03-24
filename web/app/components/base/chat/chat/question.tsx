@@ -29,7 +29,7 @@ const Question: FC<QuestionProps> = ({
 
   return (
     <div className='mb-2 flex justify-end pl-14 last:mb-0'>
-      <div className='group relative mr-4 max-w-full'>
+      <div className='group relative max-w-full lg:mr-4'>
         <div
           className='rounded-2xl bg-[#D1E9FF]/50 px-4 py-3 text-sm text-gray-900'
           style={theme?.chatBubbleColorStyle ? CssTransform(theme.chatBubbleColorStyle) : {}}
@@ -47,7 +47,7 @@ const Question: FC<QuestionProps> = ({
         </div>
         <div className='mt-1 h-[18px]' />
       </div>
-      <div className='h-10 w-10 shrink-0'>
+      <div className='hidden h-10 w-10 shrink-0 lg:block'>
         {
           questionIcon || (
             <div className='h-full w-full rounded-full border-[0.5px] border-black/5'>

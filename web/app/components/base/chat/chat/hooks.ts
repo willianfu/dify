@@ -30,6 +30,7 @@ import { WorkflowRunningStatus } from '@/app/components/workflow/types'
 import useTimestamp from '@/hooks/use-timestamp'
 import { AudioPlayerManager } from '@/app/components/base/audio-btn/audio.player.manager'
 import type { FileEntity } from '@/app/components/base/file-uploader/types'
+import { NkyLog } from './nky-log'
 import {
   getProcessedFiles,
   getProcessedFilesFromResponse,
@@ -293,6 +294,8 @@ export const useChat = (
       })
     }
 
+    let isSendNkyLog = false
+
     let isAgentMode = false
     let hasSetResponseId = false
 
@@ -317,6 +320,10 @@ export const useChat = (
       {
         isPublicAPI,
         onData: (message: string, isFirstMessage: boolean, { conversationId: newConversationId, messageId, taskId }: any) => {
+          if (!isSendNkyLog && conversationId && query) {
+            isSendNkyLog = true
+            NkyLog({ query, conversationId: newConversationId })
+          }
           if (!isAgentMode) {
             responseItem.content = responseItem.content + message
           }

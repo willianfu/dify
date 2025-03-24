@@ -1,4 +1,7 @@
 const { codeInspectorPlugin } = require('code-inspector-plugin')
+
+const ServerUrl = 'http://192.168.20.98:20080'
+
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
   options: {
@@ -48,15 +51,15 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://58.17.14.95:10015/api/:path*',
+        destination: `${ServerUrl}/api/:path*`,
       },
       {
         source: '/console/api/:path*',
-        destination: 'http://58.17.14.95:10015/console/api/:path*',
+        destination: `${ServerUrl}/console/api/:path*`,
       },
       {
         source: '/files/:path*',
-        destination: 'http://58.17.14.95:10015/files/:path*',
+        destination: `${ServerUrl}/files/:path*`,
       },
     ]
   },
