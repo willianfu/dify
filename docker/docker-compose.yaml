@@ -428,6 +428,9 @@ x-shared-env: &shared-api-worker-env
   PLUGIN_PYTHON_ENV_INIT_TIMEOUT: ${PLUGIN_PYTHON_ENV_INIT_TIMEOUT:-120}
   PLUGIN_MAX_EXECUTION_TIMEOUT: ${PLUGIN_MAX_EXECUTION_TIMEOUT:-600}
   PIP_MIRROR_URL: ${PIP_MIRROR_URL:-}
+  NEXT_PUBLIC_NKY_URL_PREFIX: ${NEXT_PUBLIC_NKY_URL_PREFIX:-http://58.17.14.95:10005}
+  BAILIAN_API_URL: ${BAILIAN_API_URL:-wss://dashscope.aliyuncs.com/api-ws/v1/inference}
+  BAILIAN_API_KEY: ${BAILIAN_API_KEY:-sk-7656cdb0f3a04cda93837b521190af21}
 
 services:
   # API service
@@ -484,7 +487,8 @@ services:
   # Frontend web application.
   web:
     # image: langgenius/dify-web:1.1.2
-    image: nky-dify-web:1.1.1 # 修改为本地镜像
+    # image: nky-dify-web:1.1.1 # 修改为本地镜像
+    image: dify-web-nky:1.1.2 # 修改为本地镜像
     restart: always
     environment:
       CONSOLE_API_URL: ${CONSOLE_API_URL:-}
@@ -501,6 +505,9 @@ services:
       LOOP_NODE_MAX_COUNT: ${LOOP_NODE_MAX_COUNT:-100}
       MAX_TOOLS_NUM: ${MAX_TOOLS_NUM:-10}
       MAX_PARALLEL_LIMIT: ${MAX_PARALLEL_LIMIT:-10}
+      NEXT_PUBLIC_NKY_URL_PREFIX: ${NEXT_PUBLIC_NKY_URL_PREFIX:-http://58.17.14.95:10005}
+      BAILIAN_API_URL: ${BAILIAN_API_URL:-wss://dashscope.aliyuncs.com/api-ws/v1/inference}
+      BAILIAN_API_KEY: ${BAILIAN_API_KEY:-sk-7656cdb0f3a04cda93837b521190af21}
 
   # The postgres database.
   db:
