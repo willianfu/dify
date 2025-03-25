@@ -35,7 +35,7 @@ const AnswerIcon: FC<AnswerIconProps> = ({
   const isValidImageIcon = iconType === 'image' && imageUrl
   return <div
     className={wrapperClassName}
-    style={{ background: background || '#D5F5F6' }}
+    style={{ background: '#FFFFFF' }}
   >
     {isValidImageIcon
       ? <img src={imageUrl} className="h-full w-full rounded-full" alt="answer icon" />

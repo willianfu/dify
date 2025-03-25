@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+docker/nky-dify-web.tar
 
 # testing
 /coverage

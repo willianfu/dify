@@ -88,7 +88,7 @@ export const ThinkBlock = ({ children, ...props }: any) => {
               d="M9 5l7 7-7 7"
             />
           </svg>
-          {isComplete ? `${t('common.chat.thought')}(${elapsedTime.toFixed(1)}s)` : `${t('common.chat.thinking')}(${elapsedTime.toFixed(1)}s)`}
+          {isComplete ? `${t('common.chat.thought')}` : `${t('common.chat.thinking')}(${elapsedTime.toFixed(1)}s)`}
         </div>
       </summary>
       <div className="ml-2 border-l border-gray-300 bg-gray-50 p-3 text-gray-500">
