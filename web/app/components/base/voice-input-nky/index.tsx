@@ -1,5 +1,7 @@
 import { memo, useState } from 'react'
-import ActionButton from '@/app/components/base/action-button'
+import ActionButton, {
+  ActionButtonState,
+} from '@/app/components/base/action-button'
 import { useMicrophone } from './useMicrophone'
 import { useAsr } from './useAsr'
 import { Icon } from '@iconify/react'
@@ -43,6 +45,7 @@ const VoiceInput = memo(({ onConverted }: VoiceInputProps) => {
           setIsRecording(true)
         }
       }}
+      state={isRecording ? ActionButtonState.Active : ActionButtonState.Default}
     >
       <Icon
         icon={isRecording ? 'svg-spinners:bars-scale-middle' : 'lucide:mic'}
