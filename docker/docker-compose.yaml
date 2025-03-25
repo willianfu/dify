@@ -3,7 +3,7 @@
 # Do not modify this file directly. Instead, update the .env.example
 # or docker-compose-template.yaml and regenerate this file.
 # ==================================================================
-
+name: dify-dev
 x-shared-env: &shared-api-worker-env
   CONSOLE_API_URL: ${CONSOLE_API_URL:-}
   CONSOLE_WEB_URL: ${CONSOLE_WEB_URL:-}
@@ -483,7 +483,8 @@ services:
 
   # Frontend web application.
   web:
-    image: langgenius/dify-web:1.1.2
+    # image: langgenius/dify-web:1.1.2
+    image: nky-dify-web:1.1.1 # 修改为本地镜像
     restart: always
     environment:
       CONSOLE_API_URL: ${CONSOLE_API_URL:-}
@@ -582,8 +583,8 @@ services:
       PYTHON_ENV_INIT_TIMEOUT: ${PLUGIN_PYTHON_ENV_INIT_TIMEOUT:-120}
       PLUGIN_MAX_EXECUTION_TIMEOUT: ${PLUGIN_MAX_EXECUTION_TIMEOUT:-600}
       PIP_MIRROR_URL: ${PIP_MIRROR_URL:-}
-    ports:
-      - "${EXPOSE_PLUGIN_DEBUGGING_PORT:-5003}:${PLUGIN_DEBUGGING_PORT:-5003}"
+    # ports:
+    #   - "${EXPOSE_PLUGIN_DEBUGGING_PORT:-5003}:${PLUGIN_DEBUGGING_PORT:-5003}"
     volumes:
       - ./volumes/plugin_daemon:/app/storage
     depends_on:
@@ -667,8 +668,7 @@ services:
       - api
       - web
     ports:
-      - '${EXPOSE_NGINX_PORT:-80}:${NGINX_PORT:-80}'
-      - '${EXPOSE_NGINX_SSL_PORT:-443}:${NGINX_SSL_PORT:-443}'
+      - '20080:${NGINX_PORT:-80}'
 
   # The Weaviate vector store.
   weaviate:
@@ -891,10 +891,12 @@ services:
       interval: 30s
       start_period: 90s
       timeout: 20s
-      retries: 3
     depends_on:
       - etcd
       - minio
+    # ports:
+    #   - 19530:19530
+    #   - 9091:9091
     ports:
       - 19530:19530
       - 9091:9091
