@@ -1,9 +1,10 @@
 type NkyLogProps = {
   query: string
   conversationId: string
+  appName: string
 }
 
-export const NkyLog = async ({ query, conversationId }: NkyLogProps) => {
+export const NkyLog = async ({ query, conversationId, appName }: NkyLogProps) => {
   const nkyUrl = process.env.NEXT_PUBLIC_NKY_URL_PREFIX
   if (typeof window === 'undefined' || !nkyUrl)
     return
@@ -13,12 +14,17 @@ export const NkyLog = async ({ query, conversationId }: NkyLogProps) => {
   if (!token || !appId)
     return
 
-  fetch(`${nkyUrl}/api/v1/nky/log`, {
+  fetch(`${nkyUrl}/admin-api/nky/ai-chats/create`, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
     body: JSON.stringify({
       // query,
       id: conversationId,
       appId,
+      appName,
     }),
   }).catch((error) => {
     console.error('NkyLog error', error)

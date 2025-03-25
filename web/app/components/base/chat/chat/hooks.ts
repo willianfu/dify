@@ -35,6 +35,7 @@ import {
   getProcessedFiles,
   getProcessedFilesFromResponse,
 } from '@/app/components/base/file-uploader/utils'
+import { useChatWithHistoryContext } from '../chat-with-history/context'
 
 type GetAbortController = (abortController: AbortController) => void
 type SendCallback = {
@@ -55,6 +56,9 @@ export const useChat = (
   clearChatList?: boolean,
   clearChatListCallback?: (state: boolean) => void,
 ) => {
+  const {
+    appData,
+  } = useChatWithHistoryContext()
   const { t } = useTranslation()
   const { formatTime } = useTimestamp()
   const { notify } = useToastContext()
@@ -322,7 +326,7 @@ export const useChat = (
         onData: (message: string, isFirstMessage: boolean, { conversationId: newConversationId, messageId, taskId }: any) => {
           if (!isSendNkyLog && conversationId && query) {
             isSendNkyLog = true
-            NkyLog({ query, conversationId: newConversationId })
+            NkyLog({ query, conversationId: newConversationId, appName: appData?.site?.title || '' })
           }
           if (!isAgentMode) {
             responseItem.content = responseItem.content + message
