@@ -1,5 +1,9 @@
 import { v4 as uuidv4 } from 'uuid'
 import WebSocket from 'ws'
+
+const ASR_URL = 'wss://dashscope.aliyuncs.com/api-ws/v1/inference'
+const ASR_TOKEN = 'sk-7656cdb0f3a04cda93837b521190af21'
+
 type AsrProps = {
   onText: (text: string) => void;
   onReady: () => void;
@@ -8,9 +12,6 @@ type AsrProps = {
 }
 
 export const startAsr = ({ onText, onError, onReady, onFinish }: AsrProps) => {
-  const url = process.env.BAILIAN_API_URL
-  const token = process.env.BAILIAN_API_KEY
-  if (!url || !token) throw new Error('BAILIAN_API_URL or BAILIAN_API_KEY is not set')
   let tempText = ''
   const textList: string[] = []
   const parseText = (text: string, isEnd: boolean) => {
@@ -26,9 +27,9 @@ export const startAsr = ({ onText, onError, onReady, onFinish }: AsrProps) => {
 
   // 生成任务ID
   const TASK_ID = uuidv4()
-  const ws = new WebSocket(url, {
+  const ws = new WebSocket(ASR_URL, {
     headers: {
-      'Authorization': `bearer ${token}`,
+      'Authorization': `bearer ${ASR_TOKEN}`,
       'X-DashScope-DataInspection': 'enable',
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     },
