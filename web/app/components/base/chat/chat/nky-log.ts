@@ -9,14 +9,16 @@ export const NkyLog = async ({ query, conversationId }: NkyLogProps) => {
     return
 
   const token = new URLSearchParams(window.location.search).get('token')
-  if (!token)
+  const appId = window.location.pathname.split('/').pop()
+  if (!token || !appId)
     return
 
   fetch(`${nkyUrl}/api/v1/nky/log`, {
     method: 'POST',
     body: JSON.stringify({
-      query,
-      conversationId,
+      // query,
+      id: conversationId,
+      appId,
     }),
   }).catch((error) => {
     console.error('NkyLog error', error)

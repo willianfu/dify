@@ -1,6 +1,6 @@
 const { codeInspectorPlugin } = require('code-inspector-plugin')
 
-const ServerUrl = 'http://192.168.20.98:20080'
+const ServerUrl = 'http://58.17.14.95:10015'
 
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
@@ -24,14 +24,25 @@ const nextConfig = {
   productionBrowserSourceMaps: false, // enable browser source map generation during the production build
   // Configure pageExtensions to include md and mdx
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  experimental: {
-  },
+  experimental: {},
   // fix all before production. Now it slow the develop speed.
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
-    dirs: ['app', 'bin', 'config', 'context', 'hooks', 'i18n', 'models', 'service', 'test', 'types', 'utils'],
+    dirs: [
+      'app',
+      'bin',
+      'config',
+      'context',
+      'hooks',
+      'i18n',
+      'models',
+      'service',
+      'test',
+      'types',
+      'utils',
+    ],
   },
   typescript: {
     // https://nextjs.org/docs/api-reference/next.config.js/ignoring-typescript-errors

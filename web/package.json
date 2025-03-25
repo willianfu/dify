@@ -13,7 +13,7 @@
     "fix": "next lint --fix",
     "eslint-fix": "eslint --fix",
     "eslint-fix-only-show-error": "eslint --fix --quiet",
-    "prepare": "cd ../ && node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky ./web/.husky",
+    "prepare": "cd ../ && node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky ./web/.husky && next-ws patch",
     "gen-icons": "node ./app/components/base/icons/script.mjs",
     "uglify-embed": "node ./bin/uglify-embed",
     "check-i18n": "node ./i18n/check-i18n.js",
@@ -55,6 +55,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@tanstack/react-query": "^5.60.5",
     "@tanstack/react-query-devtools": "^5.60.5",
+    "@types/ws": "^8.18.0",
     "ahooks": "^3.8.4",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
@@ -86,6 +87,7 @@
     "negotiator": "^0.6.3",
     "next": "15.2.3",
     "next-themes": "^0.4.3",
+    "next-ws": "^2.0.5",
     "pinyin-pro": "^3.25.0",
     "qrcode.react": "^4.2.0",
     "qs": "^6.13.0",
@@ -127,6 +129,7 @@
     "tailwind-merge": "^2.5.4",
     "use-context-selector": "^2.0.0",
     "uuid": "^10.0.0",
+    "ws": "^8.18.1",
     "zod": "^3.23.8",
     "zundo": "^2.1.0",
     "zustand": "^4.5.2"
@@ -172,6 +175,7 @@
     "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.20",
     "bing-translate-api": "^4.0.2",
+    "bufferutil": "^4.0.9",
     "code-inspector-plugin": "^0.18.1",
     "cross-env": "^7.0.3",
     "eslint": "^9.20.1",
@@ -192,7 +196,8 @@
     "ts-node": "^10.9.2",
     "typescript": "4.9.5",
     "typescript-eslint": "^8.23.0",
-    "uglify-js": "^3.19.3"
+    "uglify-js": "^3.19.3",
+    "utf-8-validate": "^6.0.5"
   },
   "resolutions": {
     "@types/react": "~18.2.0",
