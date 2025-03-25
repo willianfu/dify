@@ -59,7 +59,7 @@ const nextConfig = {
     ]
   },
   async rewrites() {
-    return [
+    return process.env.NODE_ENV === 'production' ? [] : [
       {
         source: '/api/:path*',
         destination: `${ServerUrl}/api/:path*`,

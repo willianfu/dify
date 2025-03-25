@@ -483,7 +483,7 @@ services:
 
   # Frontend web application.
   web:
-    image: nky-dify-web:1.1.1
+    image: nky-dify-web:1.1.2
     restart: always
     environment:
       CONSOLE_API_URL: ${CONSOLE_API_URL:-}
