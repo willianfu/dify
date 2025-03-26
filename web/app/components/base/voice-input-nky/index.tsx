@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import ActionButton, {
   ActionButtonState,
 } from '@/app/components/base/action-button'
@@ -32,19 +32,26 @@ const VoiceInput = memo(({ onConverted }: VoiceInputProps) => {
     onRealTimeData: () => {},
   })
 
+  const handleToggleRecording = useCallback(() => {
+    if (isRecording) {
+      stopRecording() // 停止录音
+      finishAsr() // 结束语音识别
+      setIsRecording(false)
+      return
+    }
+    startRecording() // 开始录音
+    setIsRecording(true)
+  }, [isRecording])
+
+  // // 组件卸载时关闭ws
+  // useEffect(() => {
+  //   return ()=> closeWs()
+  // }, [])
+
   return (
     <ActionButton
       size="l"
-      onClick={() => {
-        if (isRecording) {
-          stopRecording()
-          setIsRecording(false)
-        }
-        else {
-          startRecording()
-          setIsRecording(true)
-        }
-      }}
+      onClick={() => handleToggleRecording()}
       state={isRecording ? ActionButtonState.Active : ActionButtonState.Default}
     >
       <Icon

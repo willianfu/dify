@@ -508,6 +508,8 @@ services:
       NEXT_PUBLIC_NKY_URL_PREFIX: ${NEXT_PUBLIC_NKY_URL_PREFIX:-http://58.17.14.95:10005}
       BAILIAN_API_URL: ${BAILIAN_API_URL:-wss://dashscope.aliyuncs.com/api-ws/v1/inference}
       BAILIAN_API_KEY: ${BAILIAN_API_KEY:-sk-7656cdb0f3a04cda93837b521190af21}
+    ports:
+      - '23000:3000'
 
   # The postgres database.
   db:
