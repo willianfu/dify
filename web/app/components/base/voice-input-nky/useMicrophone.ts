@@ -1,8 +1,9 @@
 import { useCallback, useRef, useState } from 'react'
+import Toast from '../toast'
 
 type MicrophoneProps = {
   onAudioData: (data: Int16Array) => void,
-  onRealTimeData: (data: Float32Array) => void
+  onRealTimeData: (data: Float32Array) => void,
 }
 
 export const useMicrophone = ({ onAudioData, onRealTimeData }: MicrophoneProps) => {
@@ -43,8 +44,12 @@ export const useMicrophone = ({ onAudioData, onRealTimeData }: MicrophoneProps) 
       if (audioContextRef.current)
         return
 
-      if (!navigator.mediaDevices)
-        throw new Error('浏览器不支持麦克风权限')
+      if (!navigator.mediaDevices) {
+        return Toast.notify({
+          message: '浏览器不支持麦克风权限',
+          type: 'error',
+        })
+      }
 
       // 获取麦克风权限
       const stream = await navigator.mediaDevices.getUserMedia({

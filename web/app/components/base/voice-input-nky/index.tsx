@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback } from 'react'
 import ActionButton, {
   ActionButtonState,
 } from '@/app/components/base/action-button'
@@ -11,7 +11,6 @@ export type VoiceInputProps = {
 }
 
 const VoiceInput = memo(({ onConverted }: VoiceInputProps) => {
-  const [isRecording, setIsRecording] = useState(false)
   const {
     send: sendAudio,
     close: closeWs,
@@ -27,7 +26,7 @@ const VoiceInput = memo(({ onConverted }: VoiceInputProps) => {
     onReady: () => {},
     onFinish: () => {},
   })
-  const { startRecording, stopRecording } = useMicrophone({
+  const { startRecording, stopRecording, isRecording } = useMicrophone({
     onAudioData: sendAudio,
     onRealTimeData: () => {},
   })
@@ -36,11 +35,9 @@ const VoiceInput = memo(({ onConverted }: VoiceInputProps) => {
     if (isRecording) {
       stopRecording() // 停止录音
       finishAsr() // 结束语音识别
-      setIsRecording(false)
       return
     }
     startRecording() // 开始录音
-    setIsRecording(true)
   }, [isRecording])
 
   // // 组件卸载时关闭ws
